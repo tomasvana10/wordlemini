@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wordlemini"
+version = "0.0.1"
+description = "Wordle in the command-line"
+readme = { file = "README.md", content-type = "text/markdown" }
+authors = [{ name = "Tomas Vana" }]
+classifiers = [
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Topic :: Games/Entertainment"
+]
+keywords = ["wordle", "puzzle", "command line interface", "game"]
+dependencies = ["colorama", "textual"]
+
+[project.urls]
+Homepage = "https://github.com/tomasvana10/wordlemini"
+Repository = "https://github.com/tomasvana10/wordlemini"
+
+[project.scripts]
+wordlemini = "wordlemini.__main__:main"

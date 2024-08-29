@@ -1,0 +1,35 @@
+# my stuff
+notes.txt
+debugging
+test
+googlekey.json
+run_as_package.py
+
+# python related
+venv
+__pycache__
+py37
+py38
+py39
+py310
+py311
+py312
+
+# vscode extensions
+tempCodeRunnerFile.py
+tempCodeRunnerFile.python
+
+# macos hidden file
+**/.DS_Store
+
+# setuptools
+build
+wordlemini.egg-info
+dist
+
+# dev tools
+.ruff_cache
+
+# npm
+node_modules
+yarn.lock

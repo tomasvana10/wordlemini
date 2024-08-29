@@ -1,0 +1,58 @@
+Screen {
+    align: left middle;
+}
+
+.keyboard-and-input-grid {
+    grid-size: 1 2;
+    align: left middle;
+    grid-rows: 9;
+}
+
+.input-grid {
+    grid-size: 5 1;
+    align: left middle;
+    grid-columns: 28% 14% 14% 14% 14%;
+    grid-gutter: 1;
+}
+
+.word-grid {
+    grid-size: 5 6;
+    align: right middle;
+    grid-gutter: 0;
+    grid-columns: 5;
+    grid-rows: 3;
+}
+
+.word-grid Label {
+    border: round white;
+    content-align: center middle;
+    max-width: 10fr;
+    max-height: 10fr;
+    min-width: 10fr;
+    min-height: 10fr;
+}
+
+.keyboard-grid {
+    grid-size: 10 3;
+    width: 100%;
+    align: left middle;
+    grid-gutter: 0;
+    grid-columns: 5;
+    grid-rows: 3;
+}
+
+.keyboard-grid Button {
+    border: round white;
+    background: white 0%;
+    content-align: center middle;
+    width: 100%;
+    max-width: 10fr;
+    max-height: 10fr;
+    min-width: 10fr;
+    min-height: 10fr;
+    &:focus {}
+}
+
+.placeholder_key {
+    opacity: 0;
+}
