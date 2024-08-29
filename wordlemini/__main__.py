@@ -1,12 +1,11 @@
 """Main script/entry point for wordlemini."""
 
-import csv
 import random
 import sys
 from enum import Enum
 from itertools import chain
 from pathlib import Path
-from typing import Iterable
+from typing import Iterable, List, Union
 
 from textual.app import App
 from textual.containers import Grid, Horizontal
@@ -36,21 +35,21 @@ class Wordle(App):
     """Textual app to play a wordle game."""
 
     CSS_PATH = ASSETS / "styles.tcss"
-    words: list[str] = []
+    words: List[str] = []
 
     @classmethod
     def apply_words(cls) -> None:
         """Gather all the words in `unigram_freq.csv` that occur at a frequency
         higher than `MIN_WORD_FREQ` and have a length equal to `GRID_WIDTH`.
         """
-        with open(ASSETS / "unigram_freq.csv", encoding="utf-8") as f:
-            reader = csv.reader(f)
-            for csvs in reader:
-                if len(csvs[0]) == GRID_WIDTH and int(csvs[1]) > MIN_WORD_FREQ:
-                    cls.words.append(csvs[0])
+        with open(ASSETS / "words.txt", encoding="utf-8") as f:
+            for word in f:
+                formatted_word = word[:-1]
+                if len(formatted_word) == GRID_WIDTH:
+                    cls.words.append(formatted_word)
 
     @property
-    def main_widgets(self) -> list[Widget]:
+    def main_widgets(self) -> List[Widget]:
         """Return a list of all the main widgets."""
         return [
             *list(chain(*self.grid)),
@@ -85,7 +84,7 @@ class Wordle(App):
         self.quit = Button("Quit", name="quit", variant="error")
 
         Wordle.apply_words()
-        self.word = "karma"
+        self.word = random.choice(Wordle.words)
         self.row = 0
 
         self.nonexisting_chars: set[str] = set()
@@ -130,6 +129,7 @@ class Wordle(App):
                 button.label = str(button.label)
                 button.styles.opacity = "100%"
 
+        self.input.value = ""
         self.nonexisting_chars = set()
         self.wrong_pos_chars = set()
         self.correct_pos_chars = set()
@@ -209,7 +209,7 @@ class Wordle(App):
             sys.exit()
         return None
 
-    def on_input_submitted(self, event: Input.Submitted | None = None) -> None:
+    def on_input_submitted(self, event: Union[Input.Submitted, None] = None) -> None:
         """Handle a user submitting their word."""
         guess = str(self.input.value).casefold()
         if len(guess) != GRID_WIDTH:

@@ -50,7 +50,6 @@ Screen {
     max-height: 10fr;
     min-width: 10fr;
     min-height: 10fr;
-    &:focus {}
 }
 
 .placeholder_key {
