@@ -1,0 +1,71 @@
+# Italian translations for wordlemini.
+# Copyright (C) 2024 Tomas Vana
+# This file is distributed under the same license as the wordlemini project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-08-30 23:55+1000\n"
+"PO-Revision-Date: 2024-08-30 23:55+1000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: it\n"
+"Language-Team: it <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: __main__.py:83
+msgid "Enter your guess"
+msgstr "Inserisci la tua ipotesi"
+
+#: __main__.py:87
+msgid "Guess"
+msgstr "Indovina"
+
+#: __main__.py:88
+msgid "Delete"
+msgstr "Elimina"
+
+#: __main__.py:89
+msgid "New"
+msgstr "Nuovo"
+
+#: __main__.py:90
+msgid "Quit"
+msgstr "Esci"
+
+#: __main__.py:146
+msgid "Started new game!"
+msgstr "Nuovo gioco iniziato!"
+
+#: __main__.py:148 __main__.py:270
+msgid "The word was"
+msgstr "La parola era"
+
+#: __main__.py:247
+msgid "Guess must be 5 characters long."
+msgstr "L'ipotesi deve essere lunga 5 caratteri."
+
+#: __main__.py:253
+msgid "Guess is not in word list."
+msgstr "Immagino che non sia nell'elenco delle parole."
+
+#: __main__.py:265
+msgid "You guessed the word in"
+msgstr "Hai indovinato la parola"
+
+#: __main__.py:265
+msgid "attempts"
+msgstr "tentativi"
+
+#: __main__.py:270
+msgid "Better luck next time"
+msgstr "Più fortuna la prossima volta"
+
+#~ msgid "Start new game"
+#~ msgstr ""
+

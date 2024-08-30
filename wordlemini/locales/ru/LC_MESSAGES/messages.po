@@ -1,0 +1,72 @@
+# Russian translations for wordlemini.
+# Copyright (C) 2024 Tomas Vana
+# This file is distributed under the same license as the wordlemini project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-08-30 23:55+1000\n"
+"PO-Revision-Date: 2024-08-30 23:55+1000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: __main__.py:83
+msgid "Enter your guess"
+msgstr "Введите свое предположение"
+
+#: __main__.py:87
+msgid "Guess"
+msgstr "Предполагать"
+
+#: __main__.py:88
+msgid "Delete"
+msgstr "Удалить"
+
+#: __main__.py:89
+msgid "New"
+msgstr "Новый"
+
+#: __main__.py:90
+msgid "Quit"
+msgstr "Покидать"
+
+#: __main__.py:146
+msgid "Started new game!"
+msgstr "Начал новую игру!"
+
+#: __main__.py:148 __main__.py:270
+msgid "The word was"
+msgstr "Слово было"
+
+#: __main__.py:247
+msgid "Guess must be 5 characters long."
+msgstr "Угадай должен быть 5 символов в длину."
+
+#: __main__.py:253
+msgid "Guess is not in word list."
+msgstr "Угадай не в списке слов."
+
+#: __main__.py:265
+msgid "You guessed the word in"
+msgstr "Вы догадались слово в"
+
+#: __main__.py:265
+msgid "attempts"
+msgstr "попытки"
+
+#: __main__.py:270
+msgid "Better luck next time"
+msgstr "Удачи в следующий раз"
+
+#~ msgid "Start new game"
+#~ msgstr ""
+

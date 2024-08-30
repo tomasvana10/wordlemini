@@ -1,0 +1,8 @@
+isort
+ruff
+mypy
+pylint
+
+setuptools
+wheel
+build

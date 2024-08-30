@@ -1,0 +1,71 @@
+# French translations for wordlemini.
+# Copyright (C) 2024 Tomas Vana
+# This file is distributed under the same license as the wordlemini project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-08-30 23:55+1000\n"
+"PO-Revision-Date: 2024-08-30 23:55+1000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: __main__.py:83
+msgid "Enter your guess"
+msgstr "Entrez votre estimation"
+
+#: __main__.py:87
+msgid "Guess"
+msgstr "Devinez"
+
+#: __main__.py:88
+msgid "Delete"
+msgstr "Supprimer"
+
+#: __main__.py:89
+msgid "New"
+msgstr "Nouveau"
+
+#: __main__.py:90
+msgid "Quit"
+msgstr "Quitter"
+
+#: __main__.py:146
+msgid "Started new game!"
+msgstr "J’ai commencé un nouveau jeu !"
+
+#: __main__.py:148 __main__.py:270
+msgid "The word was"
+msgstr "Le mot était"
+
+#: __main__.py:247
+msgid "Guess must be 5 characters long."
+msgstr "Devinez doit comporter 5 caractères."
+
+#: __main__.py:253
+msgid "Guess is not in word list."
+msgstr "Deviner n'est pas dans la liste de mots."
+
+#: __main__.py:265
+msgid "You guessed the word in"
+msgstr "Vous avez deviné le mot dans"
+
+#: __main__.py:265
+msgid "attempts"
+msgstr "tentatives"
+
+#: __main__.py:270
+msgid "Better luck next time"
+msgstr "Plus de chance la prochaine fois"
+
+#~ msgid "Start new game"
+#~ msgstr ""
+

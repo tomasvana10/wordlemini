@@ -17,11 +17,11 @@ classifiers = [
     "Topic :: Games/Entertainment"
 ]
 keywords = ["wordle", "puzzle", "command line interface", "game"]
-dependencies = ["colorama", "textual"]
+dependencies = ["textual", "platformdirs", "pycountry"]
 
 [project.urls]
 Homepage = "https://github.com/tomasvana10/wordlemini"
 Repository = "https://github.com/tomasvana10/wordlemini"
 
 [project.scripts]
-wordlemini = "wordlemini.__main__:main"
+wordlemini = "wordlemini._cli:parse"

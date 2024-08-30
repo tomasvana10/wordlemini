@@ -1,26 +1,27 @@
-Screen {
-    align: left middle;
+#button-row {
+    content-align: center middle;
+    padding-top: 1;
 }
 
-.keyboard-and-input-grid {
-    grid-size: 1 2;
-    align: left middle;
-    grid-rows: 9;
+Input {
+    width: 100%;
 }
 
-.input-grid {
-    grid-size: 5 1;
-    align: left middle;
-    grid-columns: 28% 14% 14% 14% 14%;
-    grid-gutter: 1;
+#button-row Button {
+    width: 20%;
+    max-width: 20%;
+    min-width: 20%;
+    text-align: center;
 }
 
 .word-grid {
     grid-size: 5 6;
-    align: right middle;
+    align: right top;
     grid-gutter: 0;
     grid-columns: 5;
     grid-rows: 3;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
 .word-grid Label {
@@ -32,8 +33,12 @@ Screen {
     min-height: 10fr;
 }
 
-.keyboard-grid {
-    grid-size: 10 3;
+#keyboard Grid {
+    align: center middle;
+}
+
+.keyboard-row {
+    grid-size: 20 1;
     width: 100%;
     align: left middle;
     grid-gutter: 0;
@@ -41,17 +46,11 @@ Screen {
     grid-rows: 3;
 }
 
-.keyboard-grid Button {
-    border: round white;
-    background: white 0%;
-    content-align: center middle;
-    width: 100%;
-    max-width: 10fr;
-    max-height: 10fr;
-    min-width: 10fr;
-    min-height: 10fr;
-}
-
-.placeholder_key {
-    opacity: 0;
+#right-side {
+    align: center top;
+    grid-size: 1 3;
+    grid-rows: 10;
+    width: 65%;
+    overflow-x: auto;
+    overflow-y: auto;
 }

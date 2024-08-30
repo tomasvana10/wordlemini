@@ -2,6 +2,7 @@
 notes.txt
 debugging
 test
+test.py
 googlekey.json
 run_as_package.py
 
@@ -29,6 +30,7 @@ dist
 
 # dev tools
 .ruff_cache
+.mypy_cache
 
 # npm
 node_modules

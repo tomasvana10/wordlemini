@@ -1,0 +1,71 @@
+# Portuguese translations for wordlemini.
+# Copyright (C) 2024 Tomas Vana
+# This file is distributed under the same license as the wordlemini project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-08-30 23:55+1000\n"
+"PO-Revision-Date: 2024-08-30 23:55+1000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: pt\n"
+"Language-Team: pt <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: __main__.py:83
+msgid "Enter your guess"
+msgstr "Digite seu palpite"
+
+#: __main__.py:87
+msgid "Guess"
+msgstr "Adivinhe"
+
+#: __main__.py:88
+msgid "Delete"
+msgstr "Excluir"
+
+#: __main__.py:89
+msgid "New"
+msgstr "Novo"
+
+#: __main__.py:90
+msgid "Quit"
+msgstr "Sair"
+
+#: __main__.py:146
+msgid "Started new game!"
+msgstr "Começou um novo jogo!"
+
+#: __main__.py:148 __main__.py:270
+msgid "The word was"
+msgstr "A palavra era"
+
+#: __main__.py:247
+msgid "Guess must be 5 characters long."
+msgstr "O palpite deve ter 5 caracteres."
+
+#: __main__.py:253
+msgid "Guess is not in word list."
+msgstr "Acho que não está na lista de palavras."
+
+#: __main__.py:265
+msgid "You guessed the word in"
+msgstr "Você adivinhou a palavra em"
+
+#: __main__.py:265
+msgid "attempts"
+msgstr "tentativas"
+
+#: __main__.py:270
+msgid "Better luck next time"
+msgstr "Melhor sorte da próxima vez"
+
+#~ msgid "Start new game"
+#~ msgstr ""
+

@@ -1,48 +1,49 @@
+# pylint: disable=undefined-variable
+# pylint: disable=unused-wildcard-import
+# ruff: noqa: F405
+# mypy: disable-error-code="name-defined"
+
 """Main script/entry point for wordlemini."""
 
 import random
 import sys
-from enum import Enum
 from itertools import chain
-from pathlib import Path
 from typing import Iterable, List, Union
 
 from textual.app import App
-from textual.containers import Grid, Horizontal
+from textual.binding import Binding
+from textual.containers import Grid, Horizontal, Vertical
 from textual.widget import Widget
 from textual.widgets import Button, Input, Label, Rule
 
+from . import ASSETS, CORPUS
+from ._config import Config
+from ._keyboards import *  # noqa
+from ._util import translate
 
-class Enums(Enum):
-    """Miscellaneous enums."""
+translate(Config.get("settings", "lang"))
 
-    PLACEHOLDER = "PLACEHOLDER"
-
-
-MIN_WORD_FREQ = 2_000_000
 GRID_WIDTH = 5
 GRID_HEIGHT = 6
-DIR = Path(__file__).resolve().parent
-ASSETS = DIR / "assets"
-KEYBOARD = [
-    ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-    ["A", "S", "D", "F", "G", "H", "J", "K", "L", Enums.PLACEHOLDER.value],
-    ["Z", "X", "C", "V", "B", "N", "M"],
-]
 
 
 class Wordle(App):
     """Textual app to play a wordle game."""
 
     CSS_PATH = ASSETS / "styles.tcss"
+    BINDINGS = [
+        Binding("ctrl+n", "new_game_keybind", "Start new game"),
+    ]
+    LANG = Config.get("settings", "lang")
+
     words: List[str] = []
 
     @classmethod
     def apply_words(cls) -> None:
-        """Gather all the words in `unigram_freq.csv` that occur at a frequency
-        higher than `MIN_WORD_FREQ` and have a length equal to `GRID_WIDTH`.
+        """Gather all the words in a particular `<lang-code>.txt` file and append
+        them to `Wordle.words`.
         """
-        with open(ASSETS / "words.txt", encoding="utf-8") as f:
+        with open(CORPUS / f"{Wordle.LANG}.txt", encoding="utf-8") as f:
             for word in f:
                 formatted_word = word[:-1]
                 if len(formatted_word) == GRID_WIDTH:
@@ -53,7 +54,7 @@ class Wordle(App):
         """Return a list of all the main widgets."""
         return [
             *list(chain(*self.grid)),
-            *self.keyboard,
+            *list(chain(*self.keyboard)),
             self.input,
             self.submit,
             self.delete,
@@ -63,28 +64,31 @@ class Wordle(App):
     def __init__(self) -> None:
         """Initialise widgets and pick a random word to begin the first game."""
         super().__init__()
+        self.dark = Config.get("settings", "dark")
         self.grid = [
             [Label("") for i in range(GRID_WIDTH)] for j in range(GRID_HEIGHT)
         ]
+        if not self.dark:
+            for label in list(chain(*self.grid)):
+                label.styles.border = ("round", "black")
         self.keyboard = [
-            Button(key, name="key")
-            if key != Enums.PLACEHOLDER
-            else Button("", classes="placeholder_key")
-            for row in KEYBOARD
-            for key in row
+            [Button(key, name="key") for key in row]
+            for row in globals().get(f"KEYBOARD_{Wordle.LANG.upper()}")
+            or KEYBOARD_EN
         ]
         self.input = Input(
-            placeholder="Enter your word",
+            placeholder=_("Enter your guess"),
             type="text",
             restrict=r"[a-zA-Z]{0,5}",
         )
-        self.submit = Button("Submit", name="submit")
-        self.delete = Button("Delete", name="delete")
-        self.new = Button("New Game", name="new")
-        self.quit = Button("Quit", name="quit", variant="error")
+        self.submit = Button(f"{_("Guess")} [↵]", name="submit")
+        self.delete = Button(f"{_("Delete")} [⌫]", name="delete")
+        self.new = Button(f"{_("New")} [^n]", name="new")
+        self.quit = Button(f"{_("Quit")} [^c]", name="quit", variant="error")
 
         Wordle.apply_words()
-        self.word = random.choice(Wordle.words)
+        self.word = random.choice(Wordle.words).casefold()
+        self.guess = ""
         self.row = 0
 
         self.nonexisting_chars: set[str] = set()
@@ -97,16 +101,27 @@ class Wordle(App):
             Grid(*list(chain(*self.grid)), classes="word-grid"),
             Rule(orientation="vertical"),
             Grid(
-                Grid(*list(self.keyboard), classes="keyboard-grid"),
-                Grid(
-                    self.input,
-                    self.submit,
-                    self.delete,
-                    self.new,
-                    self.quit,
-                    classes="input-grid",
+                Vertical(
+                    *[
+                        Horizontal(Grid(*row, classes="keyboard-row"))
+                        for row in self.keyboard
+                    ],
+                    id="keyboard",
                 ),
-                classes="keyboard-and-input-grid",
+                Vertical(
+                    self.input,
+                    Horizontal(
+                        self.submit,
+                        Rule(),
+                        self.delete,
+                        Rule(),
+                        self.new,
+                        Rule(),
+                        self.quit,
+                        id="button-row",
+                    ),
+                ),
+                id="right-side",
             ),
         )
         self.input.focus()
@@ -116,18 +131,25 @@ class Wordle(App):
         for widget in self.main_widgets:
             widget.disabled = state
 
+    def action_new_game_keybind(self):
+        self.new.action_press()
+
     def new_game(self) -> None:
         """Begin a new game - which involves picking a new word and resetting
         all colour-related hints in the keyboard as well as user input in the
         grid.
         """
-        self.notify("Started new game!", timeout=2.0)
+        txt = _("Started new game!")
+        if self.guess != self.word:
+            txt += f" ({_("The word was")} {self.word.upper()})"
+        self.notify(txt, timeout=2.0)
         for label in [*list(chain(*self.grid))]:
             label.update("")
-        for button in self.keyboard:
-            if button.name == "key":
-                button.label = str(button.label)
-                button.styles.opacity = "100%"
+        for row in self.keyboard:
+            for button in row:
+                if button.name == "key":
+                    button.label = str(button.label)
+                    button.styles.opacity = "100%"
 
         self.input.value = ""
         self.nonexisting_chars = set()
@@ -136,6 +158,7 @@ class Wordle(App):
         self.word = random.choice(Wordle.words)
         self.row = 0
         self.set_disabled_state_of_all_widgets(False)
+        self.input.focus()
 
     def update_grid(self, guess: str) -> None:
         """Update the current row of the grid. This is a more advanced algorithm
@@ -175,14 +198,15 @@ class Wordle(App):
 
     def update_keyboard(self) -> None:
         """Update the virtual keyboard."""
-        for button in self.keyboard:
-            label = str(button.label).casefold()
-            if label in self.correct_pos_chars:
-                button.label = f"[green]{label.upper()}[/green]"
-            elif label in self.wrong_pos_chars:
-                button.label = f"[yellow]{label.upper()}[/yellow]"
-            elif label in self.nonexisting_chars:
-                button.styles.opacity = "1%"
+        for row in self.keyboard:
+            for button in row:
+                label = str(button.label).casefold()
+                if label in self.correct_pos_chars:
+                    button.label = f"[green]{label.upper()}[/green]"
+                elif label in self.wrong_pos_chars:
+                    button.label = f"[yellow]{label.upper()}[/yellow]"
+                elif label in self.nonexisting_chars:
+                    button.styles.opacity = "20%"
 
     def update_char_statuses(self, guess: str) -> None:
         """Update the status of the characters in `guess`."""
@@ -209,19 +233,22 @@ class Wordle(App):
             sys.exit()
         return None
 
-    def on_input_submitted(self, event: Union[Input.Submitted, None] = None) -> None:
+    def on_input_submitted(
+        self, event: Union[Input.Submitted, None] = None
+    ) -> None:
         """Handle a user submitting their word."""
         guess = str(self.input.value).casefold()
         if len(guess) != GRID_WIDTH:
             return self.notify(
-                "Guess must be 5 characters long.",
+                _("Guess must be 5 characters long."),
                 severity="error",
                 timeout=2.0,
             )
         if guess not in Wordle.words:
             return self.notify(
-                "Guess is not in word list", severity="error", timeout=2.0
+                _("Guess is not in word list."), severity="error", timeout=2.0
             )
+        self.guess = guess
         self.update_char_statuses(guess)
         self.update_grid(guess)
         self.update_keyboard()
@@ -231,16 +258,18 @@ class Wordle(App):
         done = False
         if guess == self.word:
             self.notify(
-                f"You guessed the word in {self.row} attempt(s)!", timeout=3.5
+                f"{_("You guessed the word in")} {self.row} {_("attempts")}!",
+                timeout=3.5,
             )
             done = True
         elif self.row > GRID_WIDTH:
             self.notify(
-                f"The word was {self.word.upper()}. Better luck next time!",
+                f"{_("The word was")} {self.word.upper()}. {_("Better luck next time")}!",
                 timeout=3.5,
             )
             done = True
         if done:
+            self.guess = self.word
             self.set_disabled_state_of_all_widgets(True)
             self.new.disabled = False
 
@@ -265,10 +294,10 @@ class Wordle(App):
         self.input.action_cursor_left()
 
 
-def main() -> None:
+def initialise() -> None:
     """Initialise the Wordle game."""
     Wordle().run()
 
 
 if __name__ == "__main__":
-    main()
+    initialise()
