@@ -101,7 +101,7 @@ class WordlePage(App):
         """Provide Textual with all the widgets for the DOM."""
         yield Horizontal(
             Grid(*list(chain(*self.grid)), classes="word-grid"),
-            Rule(orientation="vertical"),
+            Rule(orientation="vertical", id="layout-sep"),
             Grid(
                 Vertical(
                     *[
@@ -114,11 +114,11 @@ class WordlePage(App):
                     Vertical(self.input, id="input-container"),
                     Horizontal(
                         self.submit,
-                        Rule(),
+                        Rule(classes="button-sep"),
                         self.delete,
-                        Rule(),
+                        Rule(classes="button-sep"),
                         self.new,
-                        Rule(),
+                        Rule(classes="button-sep"),
                         self.quit,
                         id="button-row",
                     ),

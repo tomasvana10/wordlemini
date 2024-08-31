@@ -1,3 +1,3 @@
 recursive-include wordlemini/assets *
 recursive-include wordlemini/locales/*/LC_MESSAGES *.mo
-include wordlemini/template.data.json
+include wordlemini/template.config.json
