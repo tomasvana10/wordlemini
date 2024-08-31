@@ -20,7 +20,7 @@ from textual.widgets import Button, Input, Label, MarkdownViewer, Rule
 from . import ASSETS, CORPUS
 from ._config import Config
 from ._keyboards import *  # noqa
-from ._statistics import Statistics
+from ._statistics import Statistics, _GuessDistributionTD, _StatisticsTD
 from ._util import translate
 
 DARK = Config.get("settings", "dark")
@@ -307,24 +307,36 @@ class WordlePage(App):
 
 
 class StatisticsPage(App):
+    """Textual app to view a user's wordlemini statistics."""
+
     CSS_PATH = ASSETS / "statisticstyles.tcss"
 
     @staticmethod
-    def get_markdown(
-        stats
-    ) -> str:
+    def get_markdown(stats: _StatisticsTD) -> str:
+        """Format a markdown string for the stats TUI using the statistic data
+        in the `stats` param.
+        """
+        if not stats["games"]:
+            winstr = "(NaN%)"
+            lossstr = winstr
+        else:
+            winstr = f"({floor(stats['wins'] / stats['games'] * 100)}%)"
+            lossstr = f"({floor(stats['losses'] / stats['games'] * 100)}%)"
+        guess_dist = Statistics.get_square_bars(
+            _GuessDistributionTD(**stats["guess_distribution"])  # type: ignore
+        )
         return f"""
 # {_("Your wordlemini stats")}
 
-## {_("Guess distribution")} 
-{Statistics.guess_distribution_to_squares(stats["guess_distribution"])}
+## {_("Guess distribution")}
+{guess_dist}
 
 ## {_("Game stats")}
 {_("Games played")}: {stats["games"]}
 
-{_("Wins")}: {f"{stats["wins"]} ({floor(stats["wins"] / stats["games"] * 100)}%)"}
+{_("Wins")}: {f"{stats["wins"]} {winstr}"}
 
-{_("Losses")}: {f"{stats["losses"]} ({floor(stats["losses"] / stats["games"] * 100)}%)"}
+{_("Losses")}: {f"{stats["losses"]} {lossstr}"}
         """
 
     def __init__(self) -> None:
@@ -333,11 +345,7 @@ class StatisticsPage(App):
 
     def compose(self) -> ComposeResult:
         stats = Config.read()["statistics"]
-        yield Horizontal(
-            MarkdownViewer(
-                StatisticsPage.get_markdown(stats)
-            )
-        )
+        yield Horizontal(MarkdownViewer(StatisticsPage.get_markdown(stats)))
 
 
 def initialise_wordlepage() -> None:
@@ -351,4 +359,4 @@ def initialise_statisticspage() -> None:
 
 
 if __name__ == "__main__":
-    initialise_statisticspage()
+    initialise_wordlepage()
