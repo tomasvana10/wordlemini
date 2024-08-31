@@ -6,3 +6,5 @@ pylint
 setuptools
 wheel
 build
+
+pybabel
