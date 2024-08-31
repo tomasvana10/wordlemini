@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-30 23:55+1000\n"
+"POT-Creation-Date: 2024-08-31 15:15+1000\n"
 "PO-Revision-Date: 2024-08-30 23:55+1000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -18,54 +18,74 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: __main__.py:83
+#: __main__.py:82
 msgid "Enter your guess"
 msgstr "Ingrese su suposición"
 
-#: __main__.py:87
+#: __main__.py:86
 msgid "Guess"
 msgstr "Adivina"
 
-#: __main__.py:88
-msgid "Delete"
+#: __main__.py:87
+msgid "Del"
 msgstr "eliminar"
 
-#: __main__.py:89
+#: __main__.py:88
 msgid "New"
 msgstr "Nuevo"
 
-#: __main__.py:90
+#: __main__.py:89
 msgid "Quit"
 msgstr "Renunciar"
 
-#: __main__.py:146
+#: __main__.py:145
 msgid "Started new game!"
 msgstr "¡Comenzó un nuevo juego!"
 
-#: __main__.py:148 __main__.py:270
+#: __main__.py:147 __main__.py:278
 msgid "The word was"
 msgstr "La palabra era"
 
-#: __main__.py:247
+#: __main__.py:253
 msgid "Guess must be 5 characters long."
 msgstr "Supongo que debe tener 5 caracteres."
 
-#: __main__.py:253
+#: __main__.py:259
 msgid "Guess is not in word list."
 msgstr "Supongo que no está en la lista de palabras."
 
-#: __main__.py:265
+#: __main__.py:271
 msgid "You guessed the word in"
 msgstr "Adivinaste la palabra en"
 
-#: __main__.py:265
+#: __main__.py:271
 msgid "attempts"
 msgstr "intentos"
 
-#: __main__.py:270
+#: __main__.py:278
 msgid "Better luck next time"
 msgstr "Más suerte la próxima vez"
 
-#~ msgid "Start new game"
-#~ msgstr ""
+#: __main__.py:313
+msgid "Your wordlemini stats"
+msgstr "Tus estadísticas de wordlemini"
 
+#: __main__.py:315
+msgid "Guess distribution"
+msgstr "Distribución de conjeturas"
+
+#: __main__.py:318
+msgid "Game stats"
+msgstr "estadísticas del juego"
+
+#: __main__.py:319
+msgid "Games played"
+msgstr "Juegos jugados"
+
+#: __main__.py:321
+msgid "Wins"
+msgstr "Victorias"
+
+#: __main__.py:323
+msgid "Losses"
+msgstr "Pérdidas"

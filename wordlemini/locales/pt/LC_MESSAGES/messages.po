@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-30 23:55+1000\n"
+"POT-Creation-Date: 2024-08-31 15:15+1000\n"
 "PO-Revision-Date: 2024-08-30 23:55+1000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt\n"
@@ -18,54 +18,74 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: __main__.py:83
+#: __main__.py:82
 msgid "Enter your guess"
 msgstr "Digite seu palpite"
 
-#: __main__.py:87
+#: __main__.py:86
 msgid "Guess"
 msgstr "Adivinhe"
 
-#: __main__.py:88
-msgid "Delete"
+#: __main__.py:87
+msgid "Del"
 msgstr "Excluir"
 
-#: __main__.py:89
+#: __main__.py:88
 msgid "New"
 msgstr "Novo"
 
-#: __main__.py:90
+#: __main__.py:89
 msgid "Quit"
 msgstr "Sair"
 
-#: __main__.py:146
+#: __main__.py:145
 msgid "Started new game!"
 msgstr "Começou um novo jogo!"
 
-#: __main__.py:148 __main__.py:270
+#: __main__.py:147 __main__.py:278
 msgid "The word was"
 msgstr "A palavra era"
 
-#: __main__.py:247
+#: __main__.py:253
 msgid "Guess must be 5 characters long."
 msgstr "O palpite deve ter 5 caracteres."
 
-#: __main__.py:253
+#: __main__.py:259
 msgid "Guess is not in word list."
 msgstr "Acho que não está na lista de palavras."
 
-#: __main__.py:265
+#: __main__.py:271
 msgid "You guessed the word in"
 msgstr "Você adivinhou a palavra em"
 
-#: __main__.py:265
+#: __main__.py:271
 msgid "attempts"
 msgstr "tentativas"
 
-#: __main__.py:270
+#: __main__.py:278
 msgid "Better luck next time"
 msgstr "Melhor sorte da próxima vez"
 
-#~ msgid "Start new game"
-#~ msgstr ""
+#: __main__.py:313
+msgid "Your wordlemini stats"
+msgstr "Suas estatísticas do wordlemini"
 
+#: __main__.py:315
+msgid "Guess distribution"
+msgstr "Distribuição de adivinhação"
+
+#: __main__.py:318
+msgid "Game stats"
+msgstr "Estatísticas do jogo"
+
+#: __main__.py:319
+msgid "Games played"
+msgstr "Jogos disputados"
+
+#: __main__.py:321
+msgid "Wins"
+msgstr "Vitórias"
+
+#: __main__.py:323
+msgid "Losses"
+msgstr "Perdas"

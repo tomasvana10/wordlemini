@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-30 23:55+1000\n"
+"POT-Creation-Date: 2024-08-31 15:15+1000\n"
 "PO-Revision-Date: 2024-08-30 23:55+1000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -18,54 +18,74 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: __main__.py:83
+#: __main__.py:82
 msgid "Enter your guess"
 msgstr "Entrez votre estimation"
 
-#: __main__.py:87
+#: __main__.py:86
 msgid "Guess"
 msgstr "Devinez"
 
-#: __main__.py:88
-msgid "Delete"
+#: __main__.py:87
+msgid "Del"
 msgstr "Supprimer"
 
-#: __main__.py:89
+#: __main__.py:88
 msgid "New"
 msgstr "Nouveau"
 
-#: __main__.py:90
+#: __main__.py:89
 msgid "Quit"
 msgstr "Quitter"
 
-#: __main__.py:146
+#: __main__.py:145
 msgid "Started new game!"
 msgstr "J’ai commencé un nouveau jeu !"
 
-#: __main__.py:148 __main__.py:270
+#: __main__.py:147 __main__.py:278
 msgid "The word was"
 msgstr "Le mot était"
 
-#: __main__.py:247
+#: __main__.py:253
 msgid "Guess must be 5 characters long."
 msgstr "Devinez doit comporter 5 caractères."
 
-#: __main__.py:253
+#: __main__.py:259
 msgid "Guess is not in word list."
 msgstr "Deviner n'est pas dans la liste de mots."
 
-#: __main__.py:265
+#: __main__.py:271
 msgid "You guessed the word in"
 msgstr "Vous avez deviné le mot dans"
 
-#: __main__.py:265
+#: __main__.py:271
 msgid "attempts"
 msgstr "tentatives"
 
-#: __main__.py:270
+#: __main__.py:278
 msgid "Better luck next time"
 msgstr "Plus de chance la prochaine fois"
 
-#~ msgid "Start new game"
-#~ msgstr ""
+#: __main__.py:313
+msgid "Your wordlemini stats"
+msgstr "Vos statistiques wordlemini"
 
+#: __main__.py:315
+msgid "Guess distribution"
+msgstr "Devinez la distribution"
+
+#: __main__.py:318
+msgid "Game stats"
+msgstr "Statistiques du jeu"
+
+#: __main__.py:319
+msgid "Games played"
+msgstr "Parties jouées"
+
+#: __main__.py:321
+msgid "Wins"
+msgstr "Gagne"
+
+#: __main__.py:323
+msgid "Losses"
+msgstr "Pertes"

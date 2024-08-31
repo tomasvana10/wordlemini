@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-30 23:55+1000\n"
+"POT-Creation-Date: 2024-08-31 15:15+1000\n"
 "PO-Revision-Date: 2024-08-30 23:55+1000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl\n"
@@ -18,54 +18,74 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: __main__.py:83
+#: __main__.py:82
 msgid "Enter your guess"
 msgstr "Voer uw gok in"
 
-#: __main__.py:87
+#: __main__.py:86
 msgid "Guess"
 msgstr "Gok"
 
-#: __main__.py:88
-msgid "Delete"
+#: __main__.py:87
+msgid "Del"
 msgstr "Verwijderen"
 
-#: __main__.py:89
+#: __main__.py:88
 msgid "New"
 msgstr "Nieuw"
 
-#: __main__.py:90
+#: __main__.py:89
 msgid "Quit"
 msgstr "Ontslag nemen"
 
-#: __main__.py:146
+#: __main__.py:145
 msgid "Started new game!"
 msgstr "Begonnen met een nieuwe game!"
 
-#: __main__.py:148 __main__.py:270
+#: __main__.py:147 __main__.py:278
 msgid "The word was"
 msgstr "Het woord was"
 
-#: __main__.py:247
+#: __main__.py:253
 msgid "Guess must be 5 characters long."
 msgstr "Ik denk dat het 5 tekens lang moet zijn."
 
-#: __main__.py:253
+#: __main__.py:259
 msgid "Guess is not in word list."
 msgstr "Raad is niet in de tekstlijst."
 
-#: __main__.py:265
+#: __main__.py:271
 msgid "You guessed the word in"
 msgstr "Je raadde het woord in"
 
-#: __main__.py:265
+#: __main__.py:271
 msgid "attempts"
 msgstr "pogingen"
 
-#: __main__.py:270
+#: __main__.py:278
 msgid "Better luck next time"
 msgstr "De volgende keer meer geluk"
 
-#~ msgid "Start new game"
-#~ msgstr ""
+#: __main__.py:313
+msgid "Your wordlemini stats"
+msgstr "Uw wordlemini-statistieken"
 
+#: __main__.py:315
+msgid "Guess distribution"
+msgstr "Raadverdeling"
+
+#: __main__.py:318
+msgid "Game stats"
+msgstr "Spelstatistieken"
+
+#: __main__.py:319
+msgid "Games played"
+msgstr "Gespeelde spellen"
+
+#: __main__.py:321
+msgid "Wins"
+msgstr "wint"
+
+#: __main__.py:323
+msgid "Losses"
+msgstr "Verliezen"
