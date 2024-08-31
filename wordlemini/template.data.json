@@ -2,5 +2,18 @@
     "settings": {
         "lang": "en",
         "dark": true
+    },
+    "statistics": {
+        "games": 0,
+        "wins": 0,
+        "losses": 0,
+        "guess_distribution": {
+            "g1": 0,
+            "g2": 0,
+            "g3": 0,
+            "g4": 0,
+            "g5": 0,
+            "g6": 0
+        }
     }
 }

@@ -19,6 +19,7 @@ from textual.widgets import Button, Input, Label, Rule
 from . import ASSETS, CORPUS
 from ._config import Config
 from ._keyboards import *  # noqa
+from ._statistics import Statistics
 from ._util import translate
 
 LANG = Config.get("settings", "lang")
@@ -269,11 +270,13 @@ class Wordle(App):
                 timeout=3.5,
             )
             done = True
+            Statistics.add_entry(True, self.row)
         elif self.row > GRID_WIDTH:
             self.notify(
                 f"{_("The word was")} {self.word.upper()}. {_("Better luck next time")}!",
                 timeout=3.5,
             )
+            Statistics.add_entry(False)
             done = True
         if done:
             self.guess = self.word

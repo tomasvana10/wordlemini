@@ -31,13 +31,13 @@ class Config:
         return Config.DOC_CFG
 
     @staticmethod
-    def _read():
+    def read() -> Any:
         """Return the data at `Config().fp`."""
         with open(Config().fp, encoding="utf-8") as f:
             return load(f)
 
     @staticmethod
-    def _write(data: Any) -> None:
+    def write(data: Any) -> None:
         """Write `data` to `Config().fp`."""
         with open(Config().fp, "w", encoding="utf-8") as f:
             return dump(data, f, indent=4)
@@ -45,11 +45,11 @@ class Config:
     @staticmethod
     def get(sec: str, opt: str) -> Any:
         """Get the value at `sec` and `opt` in the config."""
-        return Config._read()[sec][opt]
+        return Config.read()[sec][opt]
 
     @staticmethod
     def set(sec: str, opt: str, val: Any) -> None:
         """Set config at `sec` and `opt` to `val` and write it to the file system."""
-        cfg = Config._read()
+        cfg = Config.read()
         cfg[sec][opt] = val
-        return Config._write(cfg)
+        return Config.write(cfg)
