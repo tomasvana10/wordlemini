@@ -1,10 +1,17 @@
 #button-row {
     content-align: center middle;
-    padding-top: 1;
+    height: 50%;
+    align: center middle;
+    text-align: center;
 }
 
 Input {
     width: 65%;
+}
+
+ToastRack {
+    align: left top;
+    width: 100%;
 }
 
 #input-container {
@@ -22,7 +29,7 @@ Input {
 
 .word-grid {
     grid-size: 5 6;
-    align: right top;
+    align: right middle;
     grid-gutter: 0;
     grid-columns: 5;
     grid-rows: 3;
@@ -41,6 +48,8 @@ Input {
 
 #keyboard Grid {
     align: center middle;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
 .keyboard-row {
@@ -53,10 +62,23 @@ Input {
 }
 
 #right-side {
-    align: center top;
+    align: left middle;
     grid-size: 1 3;
     grid-rows: 10;
     width: 65%;
     overflow-x: auto;
     overflow-y: auto;
+    keyline: heavy $primary;
+    margin-right: 10;
+    margin-bottom: -10;
+}
+
+#layout-sep {
+    opacity: 0%;
+}
+
+Rule.-horizontal {
+    color: $accent;
+    width: 1;
+    height: 1;
 }

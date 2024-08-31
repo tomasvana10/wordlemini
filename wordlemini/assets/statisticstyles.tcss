@@ -5,5 +5,5 @@ Horizontal {
 
 MarkdownViewer {
     align: center top;
-    width: 50%;
+    width: 75%;
 }
