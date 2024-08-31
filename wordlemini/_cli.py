@@ -4,7 +4,7 @@ from argparse import ArgumentParser, Namespace
 from logging import INFO, Formatter, StreamHandler, getLogger
 
 from . import LANGUAGES
-from .__main__ import initialise
+from .__main__ import initialise_statisticspage, initialise_wordlepage
 from ._config import Config
 from ._util import parse_lang
 
@@ -39,6 +39,7 @@ def parse() -> None:
         help="Configure settings. Type wordlemini config -h to learn more.",
     )
     config_subparsers = config_parser.add_subparsers(dest="config_command")
+
     # wordlemini {config} {lang} <lang-code>
     lang_parser = config_subparsers.add_parser(
         "lang", help="Set the language. e.x. `wordlemini config lang es`."
@@ -46,6 +47,7 @@ def parse() -> None:
     lang_parser.add_argument(
         "language", type=str, help="Language code or name"
     )
+
     # wordlemini {config} {dark} <on/off>
     dark_parser = config_subparsers.add_parser(
         "dark",
@@ -55,6 +57,9 @@ def parse() -> None:
         "dark", type=str, help="Dark mode state - on or off"
     )
 
+    # wordlemini {stats}
+    subparsers.add_parser("stats", help="View your game statistics.")
+
     args = parser.parse_args()
     handle_args(args)
 
@@ -62,7 +67,7 @@ def parse() -> None:
 def handle_args(args: Namespace) -> None:
     """Handle the arguments the user has entered."""
     if args.command is None:
-        return initialise()
+        return initialise_wordlepage()
     if args.command == "config":
         if args.config_command == "lang":
             lang = parse_lang(args.language)
@@ -82,6 +87,8 @@ def handle_args(args: Namespace) -> None:
                 return logger.error("Value must either be on or off")
             Config.set("settings", "dark", val)
             return logger.info("Turned dark mode %s.", dark)
+    if args.command == "stats":
+        return initialise_statisticspage()
 
     return None
 

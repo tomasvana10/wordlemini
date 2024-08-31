@@ -8,13 +8,14 @@
 import random
 import sys
 from itertools import chain
-from typing import Iterable, List, Union
+from math import floor
+from typing import List, Union
 
-from textual.app import App
+from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import Grid, Horizontal, Vertical
 from textual.widget import Widget
-from textual.widgets import Button, Input, Label, Rule
+from textual.widgets import Button, Input, Label, MarkdownViewer, Rule
 
 from . import ASSETS, CORPUS
 from ._config import Config
@@ -22,32 +23,32 @@ from ._keyboards import *  # noqa
 from ._statistics import Statistics
 from ._util import translate
 
+DARK = Config.get("settings", "dark")
 LANG = Config.get("settings", "lang")
 translate(LANG)
 
-GRID_WIDTH = 5
-GRID_HEIGHT = 6
 
-
-class Wordle(App):
+class WordlePage(App):
     """Textual app to play a wordle game."""
 
-    CSS_PATH = ASSETS / "styles.tcss"
+    CSS_PATH = ASSETS / "wordlestyles.tcss"
     BINDINGS = [
         Binding("ctrl+n", "new_game_keybind", "Start new game"),
     ]
+    GRID_WIDTH = 5
+    GRID_HEIGHT = 6
 
     words: List[str] = []
 
     @classmethod
     def apply_words(cls) -> None:
         """Gather all the words in a particular `<lang-code>.txt` file and append
-        them to `Wordle.words`.
+        them to `WordlePage.words`.
         """
         with open(CORPUS / f"{LANG}.txt", encoding="utf-8") as f:
             for word in f:
                 formatted_word = word[:-1]
-                if len(formatted_word) == GRID_WIDTH:
+                if len(formatted_word) == WordlePage.GRID_WIDTH:
                     cls.words.append(formatted_word)
 
     @property
@@ -66,10 +67,11 @@ class Wordle(App):
         """Initialise widgets and pick a random word to begin the first game."""
         super().__init__()
         self.grid = [
-            [Label("") for i in range(GRID_WIDTH)] for j in range(GRID_HEIGHT)
+            [Label("") for i in range(WordlePage.GRID_WIDTH)]
+            for j in range(WordlePage.GRID_HEIGHT)
         ]
-        self.dark = Config.get("settings", "dark")
-        if not self.dark:
+        self.dark = DARK
+        if not DARK:
             for label in list(chain(*self.grid)):
                 label.styles.border = ("round", "black")
         self.keyboard = [
@@ -86,8 +88,8 @@ class Wordle(App):
         self.new = Button(f"{_("New")} [^n]", name="new")
         self.quit = Button(f"{_("Quit")} [^c]", name="quit", variant="error")
 
-        Wordle.apply_words()
-        self.word = random.choice(Wordle.words).casefold()
+        WordlePage.apply_words()
+        self.word = random.choice(WordlePage.words).casefold()
         self.guess = ""
         self.row = 0
 
@@ -95,7 +97,7 @@ class Wordle(App):
         self.wrong_pos_chars: set[str] = set()
         self.correct_pos_chars: set[str] = set()
 
-    def compose(self) -> Iterable[Horizontal]:
+    def compose(self) -> ComposeResult:
         """Provide Textual with all the widgets for the DOM."""
         yield Horizontal(
             Grid(*list(chain(*self.grid)), classes="word-grid"),
@@ -147,7 +149,7 @@ class Wordle(App):
         for label in [*list(chain(*self.grid))]:
             label.update("")
             label.styles.border = (
-                ("round", "white") if self.dark else ("round", "black")  # type: ignore
+                ("round", "white") if DARK else ("round", "black")  # type: ignore
             )
         for row in self.keyboard:
             for button in row:
@@ -159,7 +161,7 @@ class Wordle(App):
         self.nonexisting_chars = set()
         self.wrong_pos_chars = set()
         self.correct_pos_chars = set()
-        self.word = random.choice(Wordle.words).casefold()
+        self.word = random.choice(WordlePage.words).casefold()
         self.row = 0
         self.set_disabled_state_of_all_widgets(False)
         self.input.focus()
@@ -246,13 +248,13 @@ class Wordle(App):
     ) -> None:
         """Handle a user submitting their word."""
         guess = str(self.input.value).casefold()
-        if len(guess) != GRID_WIDTH:
+        if len(guess) != WordlePage.GRID_WIDTH:
             return self.notify(
                 _("Guess must be 5 characters long."),
                 severity="error",
                 timeout=2.0,
             )
-        if guess not in Wordle.words:
+        if guess not in WordlePage.words:
             return self.notify(
                 _("Guess is not in word list."), severity="error", timeout=2.0
             )
@@ -271,7 +273,7 @@ class Wordle(App):
             )
             done = True
             Statistics.add_entry(True, self.row)
-        elif self.row > GRID_WIDTH:
+        elif self.row > WordlePage.GRID_WIDTH:
             self.notify(
                 f"{_("The word was")} {self.word.upper()}. {_("Better luck next time")}!",
                 timeout=3.5,
@@ -288,7 +290,7 @@ class Wordle(App):
     def action_submit_char(self, event: Button.Pressed) -> None:
         """Enter a character from the virtual keyboard into `self.input`."""
         self.input.focus()
-        if len(self.input.value) >= GRID_WIDTH:
+        if len(self.input.value) >= WordlePage.GRID_WIDTH:
             return
         self.input.value = (
             self.input.value + str(event.button.label).casefold()
@@ -304,10 +306,53 @@ class Wordle(App):
         self.input.action_cursor_left()
 
 
-def initialise() -> None:
-    """Initialise the Wordle game."""
-    Wordle().run()
+class StatisticsPage(App):
+    CSS_PATH = ASSETS / "statisticstyles.tcss"
+
+    MARKDOWN = """
+# Your wordlemini stats
+
+## Guess distribution 
+{distribution}
+
+## Game stats
+Games played: {games}
+
+Wins: {wins}
+
+Losses: {losses}
+    """
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.dark = DARK
+
+    def compose(self) -> ComposeResult:
+        stats = Config.read()["statistics"]
+        yield Horizontal(
+            MarkdownViewer(
+                StatisticsPage.MARKDOWN.format(
+                    distribution=Statistics.guess_distribution_to_squares(
+                        stats["guess_distribution"]
+                    ),
+                    games=stats["games"],
+                    wins=f"{stats["wins"]} ({floor(stats["wins"] / stats["games"] * 100)}%)",
+                    losses=f"{stats["losses"]} ({floor(stats["losses"] / stats["games"] * 100)}%)",
+                ),
+                show_table_of_contents=False,
+            )
+        )
+
+
+def initialise_wordlepage() -> None:
+    """Initialise the WordlePage TUI."""
+    WordlePage().run()
+
+
+def initialise_statisticspage() -> None:
+    """Initialise the StatisticsPage TUI."""
+    StatisticsPage().run()
 
 
 if __name__ == "__main__":
-    initialise()
+    initialise_wordlepage()

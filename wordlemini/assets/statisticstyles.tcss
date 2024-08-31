@@ -1,0 +1,9 @@
+Horizontal {
+    align: center middle;
+    content-align: center middle;
+}
+
+MarkdownViewer {
+    align: center top;
+    width: 75%;
+}
