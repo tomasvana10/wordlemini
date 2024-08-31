@@ -309,19 +309,23 @@ class WordlePage(App):
 class StatisticsPage(App):
     CSS_PATH = ASSETS / "statisticstyles.tcss"
 
-    MARKDOWN = """
-# Your wordlemini stats
+    @staticmethod
+    def get_markdown(
+        stats
+    ) -> str:
+        return f"""
+# {_("Your wordlemini stats")}
 
-## Guess distribution 
-{distribution}
+## {_("Guess distribution")} 
+{Statistics.guess_distribution_to_squares(stats["guess_distribution"])}
 
-## Game stats
-Games played: {games}
+## {_("Game stats")}
+{_("Games played")}: {stats["games"]}
 
-Wins: {wins}
+{_("Wins")}: {f"{stats["wins"]} ({floor(stats["wins"] / stats["games"] * 100)}%)"}
 
-Losses: {losses}
-    """
+{_("Losses")}: {f"{stats["losses"]} ({floor(stats["losses"] / stats["games"] * 100)}%)"}
+        """
 
     def __init__(self) -> None:
         super().__init__()
@@ -331,15 +335,7 @@ Losses: {losses}
         stats = Config.read()["statistics"]
         yield Horizontal(
             MarkdownViewer(
-                StatisticsPage.MARKDOWN.format(
-                    distribution=Statistics.guess_distribution_to_squares(
-                        stats["guess_distribution"]
-                    ),
-                    games=stats["games"],
-                    wins=f"{stats["wins"]} ({floor(stats["wins"] / stats["games"] * 100)}%)",
-                    losses=f"{stats["losses"]} ({floor(stats["losses"] / stats["games"] * 100)}%)",
-                ),
-                show_table_of_contents=False,
+                StatisticsPage.get_markdown(stats)
             )
         )
 
@@ -355,4 +351,4 @@ def initialise_statisticspage() -> None:
 
 
 if __name__ == "__main__":
-    initialise_wordlepage()
+    initialise_statisticspage()

@@ -20,7 +20,7 @@ class _StatisticsTD(TypedDict):
 
 
 class Statistics:
-    MAX_SQUARES = 30
+    MAX_SQUARES = 37
     SQUARE = "\U000025a0"
 
     @staticmethod
