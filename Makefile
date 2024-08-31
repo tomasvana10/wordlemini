@@ -8,10 +8,6 @@ codecheck:
 BABEL_CFG = wordlemini/babel.cfg
 LOCALES = wordlemini/locales
 BASE_POT = wordlemini/locales/base.pot
-TRANSLATOR = wordlemini/__dev.py
-
-# i18n
-i18n: extract update translate compile
 
 init: 
 	pybabel init -l ru -i $(BASE_POT) -d $(LOCALES)
@@ -21,9 +17,6 @@ extract:
 
 update:
 	pybabel update -i $(BASE_POT) -d $(LOCALES)
-
-translate:
-	python $(TRANSLATOR)
 
 compile:
 	pybabel compile -d $(LOCALES)
