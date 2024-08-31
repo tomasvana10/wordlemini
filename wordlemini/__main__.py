@@ -108,10 +108,7 @@ class Wordle(App):
                     id="keyboard",
                 ),
                 Vertical(
-                    Vertical(
-                        self.input,
-                        id="input-container"
-                    ),
+                    Vertical(self.input, id="input-container"),
                     Horizontal(
                         self.submit,
                         Rule(),
@@ -148,7 +145,9 @@ class Wordle(App):
         self.notify(txt, timeout=2.0)
         for label in [*list(chain(*self.grid))]:
             label.update("")
-            label.styles.border = ("round", "white") if self.dark else ("round", "black")
+            label.styles.border = (
+                ("round", "white") if self.dark else ("round", "black")  # type: ignore
+            )
         for row in self.keyboard:
             for button in row:
                 if button.name == "key":
