@@ -1,4 +1,6 @@
-from argparse import ArgumentParser
+"""Provide command-line argument parsing/handling functionality."""
+
+from argparse import ArgumentParser, Namespace
 from logging import INFO, Formatter, StreamHandler, getLogger
 
 from . import LANGUAGES
@@ -23,24 +25,28 @@ console.setFormatter(formatter)
 logger.addHandler(console)
 
 
-def parse():
+def parse() -> None:
+    """Initialise the argument parser and add arguments."""
     parser = ArgumentParser(
         description="wordlemini CLI tool", prog="wordlemini", epilog=USAGE_INFO
     )
 
     subparsers = parser.add_subparsers(dest="command")
 
+    # wordlemini {config}
     config_parser = subparsers.add_parser(
         "config",
         help="Configure settings. Type wordlemini config -h to learn more.",
     )
     config_subparsers = config_parser.add_subparsers(dest="config_command")
+    # wordlemini {config} {lang} <lang-code>
     lang_parser = config_subparsers.add_parser(
         "lang", help="Set the language. e.x. `wordlemini config lang es`."
     )
     lang_parser.add_argument(
         "language", type=str, help="Language code or name"
     )
+    # wordlemini {config} {dark} <on/off>
     dark_parser = config_subparsers.add_parser(
         "dark",
         help="Enable/disable dark mode. e.x. `wordlemini config dark off`.",
@@ -48,11 +54,13 @@ def parse():
     dark_parser.add_argument(
         "dark", type=str, help="Dark mode state - on or off"
     )
+
     args = parser.parse_args()
     handle_args(args)
 
 
-def handle_args(args):
+def handle_args(args: Namespace) -> None:
+    """Handle the arguments the user has entered."""
     if args.command is None:
         return initialise()
     if args.command == "config":
