@@ -1,9 +1,12 @@
+<div align="center">
+
 # wordle-mini
-wordle in the command-line with Textual
+
+</div>
 
 <div align="center">
 
-![wordle preview image](https://github.com/user-attachments/assets/d4ab46ef-8787-4aae-80d7-8b0a6a5bc7e8)
+![wordle preview image](https://github.com/user-attachments/assets/25fba431-aa45-407d-9d40-c171ea655681)
 ![licence](https://img.shields.io/badge/licence-MIT-green?style=flat?logo=licence)
 [![PyPI version](https://img.shields.io/pypi/v/wordlemini?style=flat-square)](https://pypi.org/project/wordlemini/)
 [![Publish to PyPI.org](https://github.com/tomasvana10/wordlemini/actions/workflows/publish.yml/badge.svg)](https://github.com/tomasvana10/wordlemini/actions/workflows/publish.yml)
@@ -14,8 +17,13 @@ wordle in the command-line with Textual
 
 </div>
 
+wordle in the command-line with `Textual`.
+
+- Download the latest source code [here](https://github.com/tomasvana10/wordlemini/releases/latest).
+- Available languages: Czech, German, English, Spanish, French, Italian, Dutch, Portugese, Russian
+
 ### Installation
-Install the package from PyPI:
+Install the package from PyPI (a virtual environment is recommended):
 ```
 pip install wordlemini
 ```
@@ -25,8 +33,24 @@ Run the game:
 wordlemini
 ```
 
+### CLI
+**positional arguments**
+
+- config
+  - lang `<lang-code>`
+  - dark `<on/off>`
+
+Example: 
+```
+wordlemini config lang ru
+```
+
 ### Runtime dependencies
-`textual`
+`textual` `platformdirs` `pycountry`
 
 ### Acknowledgements
 [textual](https://textual.textualize.io/) - A Rapid Application Development framework for Python, built by Textualize.io.
+
+[platformdirs](https://pypi.org/project/platformdirs/) - Finding the right place to store user data, independent to the OS.
+
+[pycountry](https://pypi.org/project/pycountry/) - ISO databases for languages
