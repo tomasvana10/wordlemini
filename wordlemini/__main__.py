@@ -83,10 +83,10 @@ class WordlePage(App):
             type="text",
             restrict=r"[a-zA-Z]{0,5}",
         )
-        self.submit = Button(f"{_("Guess")} [↵]", name="submit")
-        self.delete = Button(f"{_("Del")} [←]", name="delete")
-        self.new = Button(f"{_("New")} [^n]", name="new")
-        self.quit = Button(f"{_("Quit")} [^c]", name="quit", variant="error")
+        self.submit = Button(f"{_('Guess')} [↵]", name="submit")
+        self.delete = Button(f"{_('Del')} [←]", name="delete")
+        self.new = Button(f"{_('New')} [^n]", name="new")
+        self.quit = Button(f"{_('Quit')} [^c]", name="quit", variant="error")
 
         WordlePage.apply_words()
         self.word = random.choice(WordlePage.words).casefold()
@@ -144,7 +144,7 @@ class WordlePage(App):
         """
         txt = _("Started new game!")
         if self.guess != self.word:
-            txt += f" ({_("The word was")} {self.word.upper()})"
+            txt += f" ({_('The word was')} {self.word.upper()})"
         self.notify(txt, timeout=2.0)
         for label in [*list(chain(*self.grid))]:
             label.update("")
@@ -268,14 +268,14 @@ class WordlePage(App):
         done = False
         if guess == self.word:
             self.notify(
-                f"{_("You guessed the word in")} {self.row} {_("attempts")}!",
+                f"{_('You guessed the word in')} {self.row} {_('attempts')}!",
                 timeout=3.5,
             )
             done = True
             Statistics.add_entry(True, self.row)
         elif self.row > WordlePage.GRID_WIDTH:
             self.notify(
-                f"{_("The word was")} {self.word.upper()}. {_("Better luck next time")}!",
+                f"{_('The word was')} {self.word.upper()}. {_('Better luck next time')}!",
                 timeout=3.5,
             )
             Statistics.add_entry(False)
@@ -326,17 +326,17 @@ class StatisticsPage(App):
             _GuessDistributionTD(**stats["guess_distribution"])  # type: ignore
         )
         return f"""
-# {_("Your wordlemini stats")}
+# {_('Your wordlemini stats')}
 
-## {_("Guess distribution")}
+## {_('Guess distribution')}
 {guess_dist}
 
-## {_("Game stats")}
-{_("Games played")}: {stats["games"]}
+## {_('Game stats')}
+{_('Games played')}: {stats['games']}
 
-{_("Wins")}: {f"{stats["wins"]} {winstr}"}
+{_('Wins')}: {f"{stats['wins']} {winstr}"}
 
-{_("Losses")}: {f"{stats["losses"]} {lossstr}"}
+{_('Losses')}: {f"{stats['losses']} {lossstr}"}
         """
 
     def __init__(self) -> None:
