@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "wordlemini"
-version = "0.1.5"
+version = "0.1.6"
 description = "Wordle in the command-line"
 readme = { file = "README.md", content-type = "text/markdown" }
 authors = [{ name = "Tomas Vana" }]
